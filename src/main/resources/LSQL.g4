@@ -1,5 +1,5 @@
 grammar LSQL;
-import DQL;
+import DDL;
 
 sql    : (stat ';')+;  //表示可以有多个执行语句
 stat   : dml
