@@ -6,7 +6,7 @@ ddl       : create
           | alter
           ;
 create    : createDb | createTable ;
-createDb  : 'create' 'database' ID ;
+createDb  : CREATE DATABASE ID ;
 createTable
           : 'create' 'table' ID '(' fieldDeifnitions ')' ;
 fieldDeifnitions
