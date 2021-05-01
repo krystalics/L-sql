@@ -1,8 +1,5 @@
 package com.github.krystalics.lsql;
 
-import com.github.krystalics.lsql.compile.LSQLBaseListener;
-import com.github.krystalics.lsql.compile.LSQLLexer;
-import com.github.krystalics.lsql.compile.LSQLParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
