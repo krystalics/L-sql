@@ -268,8 +268,6 @@ namedExpressionSeq
     : namedExpression (',' namedExpression)*
     ;
 
-
-
 // 排序
 sortItem
     : expression ordering=(ASC | DESC)? (NULLS nullOrder=(LAST | FIRST))?
@@ -310,7 +308,7 @@ relation
     ;
 
 relationPrimary
-    : identifierList tableAlias  #tableName
+    : identifierList tableAlias        #tableName
     | '(' query ')'  tableAlias        #aliasedQuery
     | '(' relation ')'  tableAlias     #aliasedRelation
     ;
@@ -494,6 +492,7 @@ quotedIdentifier
 
 identifierList
     : '(' identifierSeq ')'
+    | identifierSeq
     ;
 
 identifierSeq
