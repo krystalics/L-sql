@@ -377,7 +377,8 @@ createTableHeader
 
 //dml
 dmlStatementNoWith
-    : insertInto queryTerm queryOrganization                                       #singleInsertQuery
+    : INSERT INTO identifier '(' identifierList ')' VALUES insertValues            #insertIntoValues
+    | insertInto queryTerm queryOrganization                                       #singleInsertQuery
     | fromClause multiInsertQueryBody+                                             #multiInsertQuery
     | DELETE FROM identifierList tableAlias whereClause?                           #deleteFromTable
     | UPDATE identifierList tableAlias setClause whereClause?                      #updateTable
@@ -388,6 +389,13 @@ insertInto
     | INSERT INTO TABLE? identifierList partitionSpec? (IF NOT EXISTS)?                                     #insertIntoTable
     | INSERT OVERWRITE LOCAL? DIRECTORY path=STRING rowFormat? createFileFormat?                            #insertOverwriteHiveDir
     | INSERT OVERWRITE LOCAL? DIRECTORY (path=STRING)? tableProvider (OPTIONS options=tablePropertyList)?   #insertOverwriteDir
+    ;
+constantList
+    : constant (',' constant)*
+    ;
+
+insertValues
+    : '(' constantList ')' (',' '(' constantList ')')*
     ;
 partitionSpec
     : PARTITION '(' partitionVal (',' partitionVal)* ')'
