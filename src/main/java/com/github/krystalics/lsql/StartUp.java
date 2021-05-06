@@ -1,5 +1,7 @@
 package com.github.krystalics.lsql;
 
+import com.github.krystalics.lsql.compile.KrystaSqlLexer;
+import com.github.krystalics.lsql.compile.KrystaSqlParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -17,13 +19,14 @@ import java.io.IOException;
 public class StartUp {
     public static void main(String[] args) throws IOException {
         final CharStream charStream = CharStreams.fromStream(new FileInputStream("/Users/krysta/study/L-sql/test.sql"));
-        final LSQLLexer lexer = new LSQLLexer(charStream);
+        final KrystaSqlLexer lexer = new KrystaSqlLexer(charStream);
         final CommonTokenStream tokens = new CommonTokenStream(lexer);
-        final LSQLParser parser = new LSQLParser(tokens);
+        final KrystaSqlParser parser = new KrystaSqlParser(tokens);
 
-        ParseTree tree = parser.sql();
+        ParseTree tree = parser.statement();
         ParseTreeWalker walker=new ParseTreeWalker();
-        walker.walk(new LSQLBaseListener(),tree);
+
+//        walker.walk(new AstBuilder(),tree);
 
     }
 }

@@ -3,114 +3,152 @@ package com.github.krystalics.lsql.compile.extend;
 import com.github.krystalics.lsql.compile.KrystaSqlBaseVisitor;
 import com.github.krystalics.lsql.compile.KrystaSqlParser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author linjiabao001
  * @date 2021/5/1
  * @description visitor 泛形指定的是 所有visit方法的返回值、暂定object
  */
-public class AstBuilder extends KrystaSqlBaseVisitor<Object> {
-    @Override
-    public Object visitSingleStatement(KrystaSqlParser.SingleStatementContext ctx) {
-        return super.visitSingleStatement(ctx);
-    }
+public class AstBuilder extends KrystaSqlBaseVisitor<String> {
+    /**
+     * 1. DDL-CREATE
+     * - DB
+     * - TABLE
+     */
 
+    /**
+     * 获取完关键信息之后、希望能够构成一个标准的对象出去完成工作
+     * @param ctx
+     * @return
+     */
     @Override
-    public Object visitCreateNamespace(KrystaSqlParser.CreateNamespaceContext ctx) {
+    public String visitCreateNamespace(KrystaSqlParser.CreateNamespaceContext ctx) {
+
+        final String namespaces = visit(ctx.identifierList());
+        final String comment = visit(ctx.commentSpec(0));
+        final String location = visit(ctx.locationSpec(0));
+        final String tableProperties = visit(ctx.tablePropertyList(0));
+
         return super.visitCreateNamespace(ctx);
     }
 
     @Override
-    public Object visitDropNamespace(KrystaSqlParser.DropNamespaceContext ctx) {
-        return super.visitDropNamespace(ctx);
-    }
-
-    @Override
-    public Object visitCreateTable(KrystaSqlParser.CreateTableContext ctx) {
+    public String visitCreateTable(KrystaSqlParser.CreateTableContext ctx) {
         return super.visitCreateTable(ctx);
     }
 
     @Override
-    public Object visitDropTable(KrystaSqlParser.DropTableContext ctx) {
-        return super.visitDropTable(ctx);
+    public String visitCommentSpec(KrystaSqlParser.CommentSpecContext ctx) {
+        return ctx.STRING().getText();
     }
 
     @Override
-    public Object visitExplain(KrystaSqlParser.ExplainContext ctx) {
-        return super.visitExplain(ctx);
+    public String visitLocationSpec(KrystaSqlParser.LocationSpecContext ctx) {
+        return ctx.STRING().getText();
+    }
+
+    /**
+     * 下面都是基础的语法规则、比如
+     * 1。identifier的获取
+     * 2。tablePropertyList获取
+     */
+
+
+    @Override
+    public String visitIdentifierList(KrystaSqlParser.IdentifierListContext ctx) {
+        return visit(ctx.identifierSeq());
+    }
+
+    /**
+     * 需要处理列表
+     *
+     * @param ctx
+     * @return
+     */
+    @Override
+    public String visitIdentifierSeq(KrystaSqlParser.IdentifierSeqContext ctx) {
+        List<String> list = new ArrayList<>();
+        for (KrystaSqlParser.IdentifierContext identifierContext : ctx.ident) {
+            final String item = visit(identifierContext);
+            list.add(item);
+        }
+        return String.join(",", list);
     }
 
     @Override
-    public Object visitShowTables(KrystaSqlParser.ShowTablesContext ctx) {
-        return super.visitShowTables(ctx);
+    public String visitUnquotedIdentifier(KrystaSqlParser.UnquotedIdentifierContext ctx) {
+        return ctx.IDENTIFIER().getText();
+    }
+
+    /**
+     * 例子：`test` 需要把两边的引号去掉
+     *
+     * @param ctx
+     * @return
+     */
+    @Override
+    public String visitQuotedIdentifier(KrystaSqlParser.QuotedIdentifierContext ctx) {
+        String text = ctx.BACKQUOTED_IDENTIFIER().getText();
+        text = text.substring(1, text.length() - 1);
+        return text;
+    }
+
+    /**
+     * 处理列表
+     *
+     * @param ctx
+     * @return
+     */
+    @Override
+    public String visitTablePropertyList(KrystaSqlParser.TablePropertyListContext ctx) {
+        List<String> list = new ArrayList<>();
+        for (KrystaSqlParser.TablePropertyContext tablePropertyContext : ctx.tableProperty()) {
+            final String item = visit(tablePropertyContext);
+            list.add(item);
+        }
+        return String.join(",", list);
     }
 
     @Override
-    public Object visitTruncateTable(KrystaSqlParser.TruncateTableContext ctx) {
-        return super.visitTruncateTable(ctx);
+    public String visitTableProperty(KrystaSqlParser.TablePropertyContext ctx) {
+        final String key = visit(ctx.key);
+        String value = "";
+        if (ctx.value != null) {
+            value = visit(ctx.value);
+        } else {
+            return key;
+        }
+        return key + ":" + value;
+    }
+
+    /**
+     * 处理包名的递进、com.example.demo
+     *
+     * @param ctx
+     * @return
+     */
+    @Override
+    public String visitTablePropertyKey(KrystaSqlParser.TablePropertyKeyContext ctx) {
+        if (ctx.STRING() != null) {
+            return ctx.STRING().getText();
+        }
+        List<String> keys = new ArrayList<>();
+        for (KrystaSqlParser.IdentifierContext identifierContext : ctx.identifier()) {
+            keys.add(visit(identifierContext));
+        }
+
+        return String.join(".", keys);
     }
 
     @Override
-    public Object visitQuery(KrystaSqlParser.QueryContext ctx) {
-        return super.visitQuery(ctx);
+    public String visitTablePropertyValue(KrystaSqlParser.TablePropertyValueContext ctx) {
+        return ctx.getText();
     }
 
     @Override
-    public Object visitTable(KrystaSqlParser.TableContext ctx) {
-        return super.visitTable(ctx);
-    }
-
-    @Override
-    public Object visitSubquery(KrystaSqlParser.SubqueryContext ctx) {
-        return super.visitSubquery(ctx);
-    }
-
-    @Override
-    public Object visitFromStatement(KrystaSqlParser.FromStatementContext ctx) {
-        return super.visitFromStatement(ctx);
-    }
-
-    @Override
-    public Object visitSelectClause(KrystaSqlParser.SelectClauseContext ctx) {
-        return super.visitSelectClause(ctx);
-    }
-
-    @Override
-    public Object visitWhereClause(KrystaSqlParser.WhereClauseContext ctx) {
-        return super.visitWhereClause(ctx);
-    }
-
-    @Override
-    public Object visitAggregationClause(KrystaSqlParser.AggregationClauseContext ctx) {
-        return super.visitAggregationClause(ctx);
-    }
-
-    @Override
-    public Object visitHavingClause(KrystaSqlParser.HavingClauseContext ctx) {
-        return super.visitHavingClause(ctx);
-    }
-
-    @Override
-    public Object visitWindowClause(KrystaSqlParser.WindowClauseContext ctx) {
-        return super.visitWindowClause(ctx);
-    }
-
-    @Override
-    public Object visitFromClause(KrystaSqlParser.FromClauseContext ctx) {
-        return super.visitFromClause(ctx);
-    }
-
-    @Override
-    public Object visitWhenClause(KrystaSqlParser.WhenClauseContext ctx) {
-        return super.visitWhenClause(ctx);
-    }
-
-    @Override
-    public Object visitSetClause(KrystaSqlParser.SetClauseContext ctx) {
-        return super.visitSetClause(ctx);
-    }
-
-    @Override
-    public Object visitExpression(KrystaSqlParser.ExpressionContext ctx) {
-        return super.visitExpression(ctx);
+    public String visitBooleanValue(KrystaSqlParser.BooleanValueContext ctx) {
+        return ctx.TRUE() != null ? ctx.TRUE().getText() : ctx.FALSE().getText();
     }
 }

@@ -988,27 +988,15 @@ public interface KrystaSqlVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrimitiveDataType(KrystaSqlParser.PrimitiveDataTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link KrystaSqlParser#identifier}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitIdentifier(KrystaSqlParser.IdentifierContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code unquotedIdentifier}
-	 * labeled alternative in {@link KrystaSqlParser#strictIdentifier}.
+	 * labeled alternative in {@link KrystaSqlParser#identifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitUnquotedIdentifier(KrystaSqlParser.UnquotedIdentifierContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code quotedIdentifierAlternative}
-	 * labeled alternative in {@link KrystaSqlParser#strictIdentifier}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitQuotedIdentifierAlternative(KrystaSqlParser.QuotedIdentifierAlternativeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link KrystaSqlParser#quotedIdentifier}.
+	 * Visit a parse tree produced by the {@code quotedIdentifier}
+	 * labeled alternative in {@link KrystaSqlParser#identifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */

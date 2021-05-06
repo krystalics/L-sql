@@ -1780,18 +1780,6 @@ public class KrystaSqlBaseListener implements KrystaSqlListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdentifier(KrystaSqlParser.IdentifierContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitIdentifier(KrystaSqlParser.IdentifierContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterUnquotedIdentifier(KrystaSqlParser.UnquotedIdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1799,18 +1787,6 @@ public class KrystaSqlBaseListener implements KrystaSqlListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUnquotedIdentifier(KrystaSqlParser.UnquotedIdentifierContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterQuotedIdentifierAlternative(KrystaSqlParser.QuotedIdentifierAlternativeContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitQuotedIdentifierAlternative(KrystaSqlParser.QuotedIdentifierAlternativeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

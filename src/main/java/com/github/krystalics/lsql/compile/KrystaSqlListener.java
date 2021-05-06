@@ -1668,46 +1668,26 @@ public interface KrystaSqlListener extends ParseTreeListener {
 	 */
 	void exitPrimitiveDataType(KrystaSqlParser.PrimitiveDataTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link KrystaSqlParser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void enterIdentifier(KrystaSqlParser.IdentifierContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link KrystaSqlParser#identifier}.
-	 * @param ctx the parse tree
-	 */
-	void exitIdentifier(KrystaSqlParser.IdentifierContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code unquotedIdentifier}
-	 * labeled alternative in {@link KrystaSqlParser#strictIdentifier}.
+	 * labeled alternative in {@link KrystaSqlParser#identifier}.
 	 * @param ctx the parse tree
 	 */
 	void enterUnquotedIdentifier(KrystaSqlParser.UnquotedIdentifierContext ctx);
 	/**
 	 * Exit a parse tree produced by the {@code unquotedIdentifier}
-	 * labeled alternative in {@link KrystaSqlParser#strictIdentifier}.
+	 * labeled alternative in {@link KrystaSqlParser#identifier}.
 	 * @param ctx the parse tree
 	 */
 	void exitUnquotedIdentifier(KrystaSqlParser.UnquotedIdentifierContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code quotedIdentifierAlternative}
-	 * labeled alternative in {@link KrystaSqlParser#strictIdentifier}.
-	 * @param ctx the parse tree
-	 */
-	void enterQuotedIdentifierAlternative(KrystaSqlParser.QuotedIdentifierAlternativeContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code quotedIdentifierAlternative}
-	 * labeled alternative in {@link KrystaSqlParser#strictIdentifier}.
-	 * @param ctx the parse tree
-	 */
-	void exitQuotedIdentifierAlternative(KrystaSqlParser.QuotedIdentifierAlternativeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link KrystaSqlParser#quotedIdentifier}.
+	 * Enter a parse tree produced by the {@code quotedIdentifier}
+	 * labeled alternative in {@link KrystaSqlParser#identifier}.
 	 * @param ctx the parse tree
 	 */
 	void enterQuotedIdentifier(KrystaSqlParser.QuotedIdentifierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link KrystaSqlParser#quotedIdentifier}.
+	 * Exit a parse tree produced by the {@code quotedIdentifier}
+	 * labeled alternative in {@link KrystaSqlParser#identifier}.
 	 * @param ctx the parse tree
 	 */
 	void exitQuotedIdentifier(KrystaSqlParser.QuotedIdentifierContext ctx);

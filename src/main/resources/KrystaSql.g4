@@ -314,7 +314,7 @@ relationPrimary
     ;
 
 tableAlias
-    : (AS? strictIdentifier identifierList?)?
+    : (AS? identifier)?
     ;
 
 joinRelation
@@ -485,18 +485,9 @@ dataType
     ;
 
 identifier
-    : strictIdentifier
-    ;
-
-strictIdentifier
     : IDENTIFIER              #unquotedIdentifier
-    | quotedIdentifier        #quotedIdentifierAlternative
+    | BACKQUOTED_IDENTIFIER   #quotedIdentifier
     ;
-
-quotedIdentifier
-    : BACKQUOTED_IDENTIFIER
-    ;
-
 
 identifierList
     : '(' identifierSeq ')'
