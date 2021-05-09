@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class SQLExecutors {
     private static final ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
-            .setNameFormat("diagnosis-pool-%d").build();
+            .setNameFormat("execute-pool-%d").build();
 
     /**
      * common Thread Pool
