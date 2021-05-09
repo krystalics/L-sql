@@ -1,6 +1,4 @@
-package com.github.krystalics.lsql.parser.handler;
-
-import com.github.krystalics.lsql.parser.internal.SQL;
+package com.github.krystalics.lsql.parser.executor.handler;
 
 /**
  * @author linjiabao001

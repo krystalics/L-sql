@@ -1,4 +1,4 @@
-package com.github.krystalics.lsql.parser.exceptions;
+package com.github.krystalics.lsql.internal.exceptions;
 
 /**
  * @author linjiabao001

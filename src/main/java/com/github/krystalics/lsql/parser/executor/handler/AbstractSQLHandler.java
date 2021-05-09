@@ -1,6 +1,6 @@
-package com.github.krystalics.lsql.parser.handler;
+package com.github.krystalics.lsql.parser.executor.handler;
 
-import com.github.krystalics.lsql.parser.internal.SQL;
+import com.github.krystalics.lsql.internal.sql.SQL;
 
 /**
  * @author linjiabao001
@@ -14,5 +14,6 @@ public abstract class AbstractSQLHandler implements SQLHandler {
     public AbstractSQLHandler(SQL sql) {
         this.sql = sql;
     }
+
 
 }

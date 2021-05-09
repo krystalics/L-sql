@@ -1,10 +1,9 @@
-package com.github.krystalics.lsql.parser.handler;
+package com.github.krystalics.lsql.parser.executor.handler;
 
 import com.github.krystalics.lsql.internal.Common;
-import com.github.krystalics.lsql.parser.exceptions.ExistsException;
-import com.github.krystalics.lsql.parser.internal.DDL;
-import com.github.krystalics.lsql.parser.internal.SQL;
-import lombok.extern.java.Log;
+import com.github.krystalics.lsql.internal.exceptions.ExistsException;
+import com.github.krystalics.lsql.internal.sql.DDL;
+import com.github.krystalics.lsql.internal.sql.SQL;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
@@ -13,7 +12,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.stream.Stream;
 
 /**
  * @author linjiabao001

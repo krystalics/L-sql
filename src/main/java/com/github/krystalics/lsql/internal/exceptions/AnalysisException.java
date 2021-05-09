@@ -1,4 +1,4 @@
-package com.github.krystalics.lsql;
+package com.github.krystalics.lsql.internal.exceptions;
 
 import com.github.krystalics.lsql.plans.LogicalPlan;
 import lombok.Data;

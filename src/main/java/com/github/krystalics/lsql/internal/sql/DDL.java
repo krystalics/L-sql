@@ -1,6 +1,5 @@
-package com.github.krystalics.lsql.parser.internal;
+package com.github.krystalics.lsql.internal.sql;
 
-import com.github.krystalics.lsql.parser.enums.SQLType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +15,5 @@ public class DDL extends SQL{
     String namespace;
     String table;
     String comment;
-//    String location;
     String properties;
 }

@@ -2,9 +2,9 @@ package com.github.krystalics.lsql.compile.extend;
 
 import com.github.krystalics.lsql.compile.KrystaSqlBaseVisitor;
 import com.github.krystalics.lsql.compile.KrystaSqlParser;
-import com.github.krystalics.lsql.parser.enums.SQLType;
+import com.github.krystalics.lsql.internal.enums.SQLType;
 import com.github.krystalics.lsql.parser.executor.SQLExecutors;
-import com.github.krystalics.lsql.parser.internal.DDL;
+import com.github.krystalics.lsql.internal.sql.DDL;
 
 import java.util.ArrayList;
 import java.util.List;

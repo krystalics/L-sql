@@ -1,9 +1,9 @@
 package com.github.krystalics.lsql.parser.executor;
 
-import com.github.krystalics.lsql.parser.exceptions.NoSuchHandlerException;
-import com.github.krystalics.lsql.parser.handler.CreateNameSpaceHandler;
-import com.github.krystalics.lsql.parser.handler.SQLHandler;
-import com.github.krystalics.lsql.parser.internal.SQL;
+import com.github.krystalics.lsql.internal.exceptions.NoSuchHandlerException;
+import com.github.krystalics.lsql.parser.executor.handler.CreateNameSpaceHandler;
+import com.github.krystalics.lsql.parser.executor.handler.SQLHandler;
+import com.github.krystalics.lsql.internal.sql.SQL;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.concurrent.ExecutorService;
@@ -26,7 +26,7 @@ public class SQLExecutors {
      */
     private static final ExecutorService pool = new ThreadPoolExecutor(20, 200,
             20L, TimeUnit.SECONDS,
-            new LinkedBlockingQueue<>(10000), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+            new LinkedBlockingQueue<>(1000), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
 
     public static void execute(Runnable runnable) {

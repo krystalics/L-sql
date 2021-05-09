@@ -1,6 +1,6 @@
-package com.github.krystalics.lsql.parser.internal;
+package com.github.krystalics.lsql.internal.sql;
 
-import com.github.krystalics.lsql.parser.enums.SQLType;
+import com.github.krystalics.lsql.internal.enums.SQLType;
 import lombok.Data;
 
 /**

@@ -1,4 +1,4 @@
-package com.github.krystalics.lsql.parser.internal;
+package com.github.krystalics.lsql.internal.sql;
 
 /**
  * @author linjiabao001
