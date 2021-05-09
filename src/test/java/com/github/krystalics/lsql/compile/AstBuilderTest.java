@@ -41,7 +41,7 @@ public class AstBuilderTest extends BaseTest {
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             KrystaSqlParser parser = new KrystaSqlParser(tokens);
             ParseTree tree = parser.statement();
-            System.out.println(tree.getText());
+
             AstBuilder ast=new AstBuilder();
             ast.visit(tree);
         } catch (IOException e) {

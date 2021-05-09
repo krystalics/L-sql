@@ -2,9 +2,17 @@ package com.github.krystalics.lsql.compile.extend;
 
 import com.github.krystalics.lsql.compile.KrystaSqlBaseVisitor;
 import com.github.krystalics.lsql.compile.KrystaSqlParser;
+import com.github.krystalics.lsql.parser.SQLTemplate;
+import com.github.krystalics.lsql.parser.enums.SQLType;
+import com.github.krystalics.lsql.parser.executor.SQLExecutors;
+import com.github.krystalics.lsql.parser.handler.CreateNameSpaceHandler;
+import com.github.krystalics.lsql.parser.internal.DDL;
 
 import java.util.ArrayList;
 import java.util.List;
+/**
+ * 对于DDL 创建表和库来说可以直接将构造的对象提给对应的Handler
+ */
 
 /**
  * @author linjiabao001
@@ -26,11 +34,14 @@ public class AstBuilder extends KrystaSqlBaseVisitor<String> {
     @Override
     public String visitCreateNamespace(KrystaSqlParser.CreateNamespaceContext ctx) {
 
-        final String namespaces = visit(ctx.identifierList());
-        final String comment = visit(ctx.commentSpec(0));
-        final String location = visit(ctx.locationSpec(0));
-        final String tableProperties = visit(ctx.tablePropertyList(0));
+        DDL ddl=new DDL();
+        ddl.setType(SQLType.CREATE_DB);
+        ddl.setNamespace(visit(ctx.identifierList()));
+        ddl.setComment(visit(ctx.commentSpec(0)));
+        ddl.setLocation(visit(ctx.locationSpec(0)));
+        ddl.setProperties(visit(ctx.tablePropertyList(0)));
 
+        SQLExecutors.execute(new CreateNameSpaceHandler(ddl));
         return super.visitCreateNamespace(ctx);
     }
 

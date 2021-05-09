@@ -1,14 +1,18 @@
 package com.github.krystalics.lsql.parser;
 
+import com.github.krystalics.lsql.parser.enums.SQLType;
+import lombok.Data;
+
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author linjiabao001
  * @date 2021/5/1
  * @description 记录sql所有的特性
  */
+@Data
 public class SQLTemplate {
+    SQLType type;
     private String database;
     private String table;
     private List<String> columns;
