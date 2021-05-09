@@ -1,5 +1,9 @@
 package com.github.krystalics.lsql.parser.executor;
 
+import com.github.krystalics.lsql.parser.exceptions.NoSuchHandlerException;
+import com.github.krystalics.lsql.parser.handler.CreateNameSpaceHandler;
+import com.github.krystalics.lsql.parser.handler.SQLHandler;
+import com.github.krystalics.lsql.parser.internal.SQL;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
 import java.util.concurrent.ExecutorService;
@@ -19,18 +23,36 @@ public class SQLExecutors {
 
     /**
      * common Thread Pool
-     *
      */
     private static final ExecutorService pool = new ThreadPoolExecutor(20, 200,
             20L, TimeUnit.SECONDS,
             new LinkedBlockingQueue<>(10000), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
 
-    public static void execute(Runnable runnable){
+    public static void execute(Runnable runnable) {
         pool.execute(runnable);
     }
 
-    public static void shutdown(){
+    public static void submit(SQL sql) {
+        SQLHandler handler=null;
+
+        switch (sql.getType()) {
+            case CREATE_DB:
+                handler = new CreateNameSpaceHandler(sql);
+                break;
+
+            case CREATE_TABLE:
+
+                break;
+            default:
+                throw new NoSuchHandlerException("、the type is "+ sql.getType());
+        }
+
+        execute(handler);
+
+    }
+
+    public static void shutdown() {
         //gracefully shutdown
         pool.shutdown();
     }

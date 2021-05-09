@@ -12,9 +12,10 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class DDL extends SQL{
-    SQLType type;
+
     String namespace;
+    String table;
     String comment;
-    String location;
+//    String location;
     String properties;
 }

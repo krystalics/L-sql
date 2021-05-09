@@ -2,10 +2,8 @@ package com.github.krystalics.lsql.compile.extend;
 
 import com.github.krystalics.lsql.compile.KrystaSqlBaseVisitor;
 import com.github.krystalics.lsql.compile.KrystaSqlParser;
-import com.github.krystalics.lsql.parser.SQLTemplate;
 import com.github.krystalics.lsql.parser.enums.SQLType;
 import com.github.krystalics.lsql.parser.executor.SQLExecutors;
-import com.github.krystalics.lsql.parser.handler.CreateNameSpaceHandler;
 import com.github.krystalics.lsql.parser.internal.DDL;
 
 import java.util.ArrayList;
@@ -38,10 +36,10 @@ public class AstBuilder extends KrystaSqlBaseVisitor<String> {
         ddl.setType(SQLType.CREATE_DB);
         ddl.setNamespace(visit(ctx.identifierList()));
         ddl.setComment(visit(ctx.commentSpec(0)));
-        ddl.setLocation(visit(ctx.locationSpec(0)));
+//        ddl.setLocation(visit(ctx.locationSpec(0)));
         ddl.setProperties(visit(ctx.tablePropertyList(0)));
 
-        SQLExecutors.execute(new CreateNameSpaceHandler(ddl));
+        SQLExecutors.submit(ddl);
         return super.visitCreateNamespace(ctx);
     }
 

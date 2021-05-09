@@ -24,13 +24,15 @@ public class AstBuilderTest extends BaseTest {
 
 
     @Test
-    public void createNamespace(){
-        String testcase="CREATE NAMESPACE (`TEST`,TEST2) \n" +
+    public void createNamespace() throws InterruptedException {
+        String testcase="CREATE NAMESPACE (`TEST`) \n" +
                 "COMMENT '这是测试库'\n" +
                 "LOCATION '/tmp/test/'\n" +
                 "WITH PROPERTIES (STORE='PARQUET',COM.EXAMPLE.DEMO.LSQL)";
         ByteArrayInputStream inputStream = new ByteArrayInputStream(testcase.getBytes());
         testMain(inputStream);
+
+        Thread.sleep(10000);
     }
 
     private void testMain(InputStream is){

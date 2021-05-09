@@ -8,9 +8,11 @@ import com.github.krystalics.lsql.parser.internal.SQL;
  * @description
  */
 public abstract class AbstractSQLHandler implements SQLHandler {
+
     SQL sql;
 
     public AbstractSQLHandler(SQL sql) {
         this.sql = sql;
     }
+
 }
